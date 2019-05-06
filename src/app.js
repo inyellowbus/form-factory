@@ -5,6 +5,7 @@ import formFactory, { Form } from './lib/form-factory';
 class TestForm extends Form {
   renderContent() {
     const { fields } = this.props;
+    console.log(this.props);
     return (
       <React.Fragment>
         { fields.name.label }
@@ -52,7 +53,7 @@ class App extends React.Component {
     return (
       <Provider store={store}>
         <h1>Hello world</h1>
-        <this.form />
+        <this.form options={[123123]}/>
       </Provider>
     );
   }

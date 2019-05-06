@@ -40,6 +40,7 @@ export const mergeProps = (_merge) => (sProps, dProps, oProps) => {
     errors,
     values,
     ...dProps,
+    ...oProps,
     ...(_merge(sProps, dProps, oProps) || {}),
   };
 };
