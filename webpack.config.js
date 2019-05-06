@@ -1,6 +1,7 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
+const CopyPlugin = require('copy-webpack-plugin');
 
 module.exports = {
   mode: 'development',
@@ -23,6 +24,12 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: "./src/index.html"
     }),
+    new CopyPlugin([
+      { from: 'src/form-factory.js', to: 'lib' },
+      { from: 'src/component.js', to: 'lib' },
+      { from: 'src/form-merge-props.js', to: 'lib' },
+      { from: 'src/reducer.js', to: 'lib' },
+    ]),
   ],
   module: {
     rules: [
