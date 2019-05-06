@@ -13,7 +13,9 @@ export const mergeProps = (_merge) => (sProps, dProps, oProps) => {
   Object.keys(sProps.fields).forEach(el => {
     fields[el].error = errors[el];
     fields[el].input = fields[el].input || { type: 'text' };
-    values[el] = values[el] || fields[el].defaultValue;
+    if(!values[el] && values[el] !== false) {
+      values[el] = fields[el].defaultValue;
+    }
     switch(fields[el].input.type) {
       case 'select':
         fields[el].input.value = values[el] || '';
