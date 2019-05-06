@@ -70,9 +70,9 @@ const ACTION_HANDLERS = {
     const nextState = state.setIn([formId, 'values'], fromJS({}));
     return nextState;
   },
-  SET_FORM_ERRORS: (state, action) => {
-    const formId = action.payload.formId;
-    const nextErrors = action.payload.errors;
+  SET_FORM_ERRORS: (state, { payload }) => {
+    const formId = payload.formId;
+    const nextErrors = payload.errors;
     const nextState = state.setIn([formId, 'errors'], fromJS(nextErrors));
     return nextState;
   },

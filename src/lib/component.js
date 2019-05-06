@@ -3,7 +3,7 @@ import _ from 'lodash';
 
 import { ac as acForms } from './reducer';
 import { mergeProps } from './form-merge-props';
-
+import validationRules from './validation';
 import React from 'react';
 import PropTypes from 'prop-types';
 
@@ -40,19 +40,38 @@ export class Form extends React.Component {
     removeForm(formId);
   }
 
+  validation() {
+    const { fields, values, formId, setErrors } = this.props;
+    const errors = {};
+    Object.keys(fields).forEach((k) => {
+      if(fields[k].validation) {
+        fields[k].validation.forEach((validation) => {
+          if(!validationRules[validation](values[k])) {
+            errors[k] = fields[k].errorText[validation];
+          }
+        });
+      }
+    });
+    if(Object.keys(errors).length) {
+      setErrors(formId, errors);
+      return false;
+    }
+    setErrors(formId, {});
+    return true;
+  }
+
   renderContent() {
     return null;
   }
 
   render() {
-    const {
-      onSubmit,
-    } = this.props;
     return (
       <form
         onSubmit={(e) => {
           e.preventDefault();
-          this.onSubmit();
+          if(this.validation()) {
+            this.onSubmit();
+          }
         }}>
         {this.renderContent()}
       </form>
@@ -64,18 +83,20 @@ const mapStateToProps = (state, ownProps = {}) => {
   const { formId } = ownProps;
   let forms = state.toJS ? state.toJS().forms : state.forms;
   forms = forms.toJS ? forms.toJS() : forms;
-  let values;
+  let values = {};
+  let errors = {};
   if (!_.isEmpty(forms) && forms[formId] && forms[formId].values) {
     values = forms[formId].values;
+    errors = forms[formId].errors
   }
   const fields = ownProps.config;
   const name = ownProps.name;
   const id = ownProps.id;
   return {
-    isDisabled: forms.isDisabled,
     fields,
     formId,
-    values: values || {},
+    values,
+    errors,
     model: ownProps.model || {},
     name,
     id,

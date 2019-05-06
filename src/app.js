@@ -5,7 +5,6 @@ import formFactory, { Form } from './lib/form-factory';
 class TestForm extends Form {
   renderContent() {
     const { fields } = this.props;
-    console.log(this.props);
     return (
       <React.Fragment>
         { fields.name.label }
@@ -30,7 +29,13 @@ class TestForm extends Form {
 class App extends React.Component {
   form = formFactory.makeForm(
     {
-      name: { label: 'Name' },
+      name: {
+        label: 'Name',
+        validation: ['required'],
+        errorText: {
+          required: 'Обязательно для заполнения',
+        },
+      },
       category: {
         label: 'category',
         defaultValue: 'three',
