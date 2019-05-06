@@ -1,6 +1,6 @@
 import React from 'react';
 import { Provider } from 'react-redux';
-import formFactory, { Form } from './form-factory';
+import formFactory, { Form } from './lib/form-factory';
 
 class TestForm extends Form {
   renderContent() {
