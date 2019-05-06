@@ -9,6 +9,14 @@ class TestForm extends Form {
       <React.Fragment>
         { fields.name.label }
         <input {...fields.name.input} />
+        { fields.category.label }
+        <select {...fields.category.input}>
+          <option value='one'>one</option>
+          <option value='two'>two</option>
+          <option value='three'>three</option>
+        </select>
+        { fields.check.label }
+        <input {...fields.check.input} />
       </React.Fragment>
     )
   }
@@ -20,7 +28,23 @@ class TestForm extends Form {
 
 class App extends React.Component {
   form = formFactory.makeForm(
-    { name: { label: 'Name' } },
+    {
+      name: { label: 'Name' },
+      category: {
+        label: 'category',
+        defaultValue: 'three',
+        input: {
+          type: 'select',
+        }
+      },
+      check: {
+        label: 'check',
+        defaultValue: false,
+        input: {
+          type: 'checkbox',
+        }
+      }
+    },
     TestForm,
   )
   render() {
