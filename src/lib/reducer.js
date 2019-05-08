@@ -19,7 +19,7 @@ const removeForm = formId => dispatch => dispatch({
   payload: { formId },
 });
 
-const setValues = (formId, values) => dispatch => dispatch({
+export const setValues = (formId, values) => dispatch => dispatch({
   type: 'SET_FORM_VALUES',
   payload: { formId, values },
 });
@@ -29,7 +29,7 @@ const clearValues = formId => dispatch => dispatch({
   payload: { formId },
 });
 
-const setErrors = (formId, errors) => dispatch => dispatch({
+export const setErrors = (formId, errors) => dispatch => dispatch({
   type: 'SET_FORM_ERRORS',
   payload: { formId, errors },
 });

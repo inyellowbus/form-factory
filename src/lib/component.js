@@ -65,8 +65,10 @@ export class Form extends React.Component {
   }
 
   render() {
+    const { className } = this.props;
     return (
       <form
+        className={className}
         onSubmit={(e) => {
           e.preventDefault();
           if(this.validation()) {

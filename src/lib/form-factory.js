@@ -1,7 +1,7 @@
 import React from 'react';
 import _ from 'lodash';
 import {mergedConnect, Form as _Form} from './component';
-import _reducer from './reducer';
+import _reducer, {setErrors as _setErrors, setValues as _setValues} from './reducer';
 
 class FormFactory {
   makeForm(config, Component, options = {}) {
@@ -33,5 +33,9 @@ class FormFactory {
 export const Form = _Form;
 
 export const reducer = _reducer;
+
+export const setErrors = _setErrors;
+
+export const setValues = _setValues;
 
 export default new FormFactory();
